@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+ <title>Sensor Report</title>
+	  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/fonts_googleapis.css')}}">
+
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/font-awesome.min.css')}}">
+
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/datatables.css')}}">
+
+	   <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-1.12.3.min.js')}}"></script>
+	   <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.dataTables.min.js')}}"></script>
+
+	  <script type="text/javascript">
+		$(document).ready(function () {
+  		$('#dtBasicExample').DataTable({"searching": false});
+  		});
+	  </script>
+	  <style>
+  		.trs{background-color: #f2f2f2;}
+	  </style>
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2  style=" font-weight: bold" class="heading-section">Sensor Report</h2>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-12">
+					<form  method="post">
+						<button style="float: right;margin: 25px 10px 75px" class="btn" id="download" method="POST" onclick="myFunction()" value="download"><i class="fa fa-download"></i> Download CSV</button>
+					</form>
+					<div >
+						<table  style=" background-color:dark" id="dtBasicExample" class="table table-striped">
+						  <thead>
+						    <tr>
+						      <th >Sensor ID</th>
+						      <th>Time</th>
+						      <th>Temperature</th>
+							  <th>Humidity</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						  {% for id in sensors %}
+						    <tr class="trs">
+						      <td><p style="font-size: 12px;">{{ id['SensorID'] }}</p></td>
+						      <td><p style="font-size: 12px;">{{ id['time'] }}</p></td>
+						      <td><p style="font-size: 12px;">{{ id['Temperature'] }}</p></td>
+							  <td><p style="font-size: 12px;">{{ id['Humidity'] }}</p></td>
+							</tr>
+						  {% endfor %}
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
+
+
+  <!--<script type="text/javascript" src="{{ url_for('static',filename='js/main.js')}}"></script>-->
+	</body>
+</html>
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert name to a sensor</title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/fonts_googleapis.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/font-awesome.min.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+
+
+  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-3.3.1.min.js')}}"></script>
+</head>
+
+
+<body style="background-color:#f8f9fd">
+
+
+<form  class="ftco-section" action="/action_page.php" align="center">
+  <label style="font-weight: bold;color: black; "  for="fname">Sensor name:</label>
+  <input class="test" type="text" id="fname" name="fname"><br><br>
+   <label style="font-weight: bold;color: black" >Choose a Sensor:</label>
+    <select  name="sensor_id" style="width: 200px " id="sensors">
+        {% for id in sensorsids %}
+            <option>{{ id }}</option>
+        {% endfor %}
+    </select>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

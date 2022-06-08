@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Sensor Report</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/fonts_googleapis.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/font-awesome.min.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+
+
+  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-3.3.1.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.dataTables.min.js')}}"></script>
+
+
+
+
+</head>
+<body>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h1 style=" font-weight: bold" class="heading-section">Select Sensor ID</h1>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+    </div>
+    <section align="center">
+        <form  method="post" id="form" required>
+  <label style="font-weight: bold;color: black" >From :</label>
+  <input id="from" type="datetime-local"  name="startTime"  required>
+
+              <label style="font-weight: bold;color: black" >To :</label>
+              <input id="to" type="datetime-local"  name="endTime" required>
+</form>
+    </section>
+    <br>
+    <br>
+<form  action="" method="post" name="formid" align="center" >
+    <label style="font-weight: bold;color: black" >Choose a Sensor:</label>
+    <select  name="sensor_id" style="width: 200px " id="sensors">
+        {% for id in sensorsids %}
+            <option>{{ id }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" name = "submit_button" value = "Show Report" id="submit_button" class="btn btn-dark">
+        <!--<input type="submit" name = "submit_button2" value = "Show Graph" id="graph_button" class="btn btn-dark"> -->
+
+<br>
+     <br>  <label >Temperature
+  <input type="radio" checked="checked" name="radio" id="tem" value="tem">
+</label>
+<label >Humidity
+  <input type="radio" name="radio" id="hum" value="hum">
+</label>
+        <input type="submit" name = "submit_button3" value = "Show Graph" id="graph_button3" class="btn btn-dark">
+
+    <br>
+    <br>
+
+    <input type="submit" name = "submit_button4" value = "Insert sensor name" id="graph_button4" class="btn btn-dark">
+
+</form>
+
+
+
+
+<script type="text/javascript">
+
+</script>
+
+
+  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',filename='js/popper.js')}}"></script>
+  <script  type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static',filename='js/main.js')}}"></script>
+
+
+
+
+  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-3.5.1.js')}}"></script>
+
+
+<script type="text/javascript">
+
+
+
+    $('#form').on('change', function(event) {
+    // Form was submitted!  Do stuff.
+    //alert('duration has been submitted!');
+
+    // Stop normal form submission, we are handling it in JS
+    event.preventDefault();
+
+    // Retrieve info about the inputs.  First let's find the input,
+    var $input1 = $('#from');
+    var $input2 = $('#to');
+
+    // Now we can pull info about that input
+      var from =   $input1.val();
+      var to = $input2.val();
+
+var xml = new XMLHttpRequest();
+xml.open("Post","{{url_for('homepage')}}",true);
+xml.onload = function(){
+var daterep =JSON.parse(this.responseText)
+}
+dataSend = JSON.stringify({'from' :from ,
+'to':to});
+xml.send(dataSend)
+
+    // You could call your label() function here if you want,
+    // though in its current state that will just navigate away
+    // so that's probably not what you want.
+    // label(id, value);
+});
+
+</script>
+
+<!--<script type="text/javascript">
+$(document).ready(function(e){
+
+  var x = document.getElementById("from").value;
+                      var y =document.getElementById("to").value;
+                      $.ajax({
+                        cache: true
+                        url:"{{url_for('homepage')}}",
+                        method:"POST",
+                        data :{'submit_button' :'Set Duration'}
+                      });
+
+               e.preventDefault();
+               document.getElementById('from').value = x;
+                              document.getElementById('to').value = y;
+                alert(x);
+
+                    });
+</script>
+-->
+</section>
+</body>
+</html>
+
